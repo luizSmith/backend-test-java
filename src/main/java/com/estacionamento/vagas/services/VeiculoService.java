@@ -30,8 +30,9 @@ public class VeiculoService {
 	}
 	
 	public Veiculo update(Veiculo obj) {
-		buscar(obj.getId());
-		return repo.save(obj);
+		Veiculo newObj = buscar(obj.getId());
+		updateData(newObj, obj);
+		return repo.save(newObj);
 	}
 	
 	public void delete(Integer id) {
@@ -41,6 +42,13 @@ public class VeiculoService {
 		} catch(DataIntegrityException e) {
 			throw new DataIntegrityException(e.getMessage());
 		}
-		
+	}
+	
+	//methodo auxiliar
+	private void updateData(Veiculo newObj, Veiculo obj) {
+		newObj.setModelo(obj.getModelo());
+		newObj.setMarca(obj.getMarca());
+		newObj.setCor(obj.getCor());
+		newObj.setPlaca(obj.getPlaca());
 	}
 }
