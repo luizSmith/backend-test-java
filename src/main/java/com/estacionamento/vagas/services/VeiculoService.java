@@ -27,4 +27,14 @@ public class VeiculoService {
 		obj.setId(null);
 		return repo.save(obj);
 	}
+	
+	public Veiculo update(Veiculo obj) {
+		buscar(obj.getId());
+		return repo.save(obj);
+	}
+	
+	public void delete(Integer id) {
+		buscar(id);
+		repo.deleteById(id);
+	}
 }
