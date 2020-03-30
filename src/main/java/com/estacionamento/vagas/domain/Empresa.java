@@ -1,7 +1,9 @@
 package com.estacionamento.vagas.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -11,6 +13,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -34,6 +37,16 @@ public class Empresa implements Serializable {
 			mappedBy = "empresa"
 	)
 	private Endereco endereco;
+	
+	@OneToMany(
+			mappedBy="empresa"
+	)	
+	private List<VagaCarro> vagaCarro = new ArrayList<>();
+	
+	@OneToMany(
+			mappedBy="empresa"
+	)
+	private List<VagaMoto> vagaMoto = new ArrayList<>();
 	
 	public Empresa() {
 	}
