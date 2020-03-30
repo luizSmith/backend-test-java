@@ -1,7 +1,13 @@
 package com.estacionamento.vagas.domain;
 
-public class Endereco {
+import java.io.Serializable;
 
+import javax.persistence.Id;
+
+public class Endereco implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
+	@Id
 	private Integer id;
 	private String longradouro;
 	private String numero;
