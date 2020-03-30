@@ -7,6 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.estacionamento.vagas.domain.enums.TipoVeiculo;
+
 @Entity
 public class Veiculo implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -19,16 +21,19 @@ public class Veiculo implements Serializable {
 	private String cor;
 	private String placa;
 	
+	private Integer tipoVeiculo;
+	
 	public Veiculo() {
 	}
 
-	public Veiculo(Integer id, String marca, String modelo, String cor, String placa) {
+	public Veiculo(Integer id, String marca, String modelo, String cor, String placa, TipoVeiculo tipoVeiculo) {
 		super();
 		this.id = id;
 		this.marca = marca;
 		this.modelo = modelo;
 		this.cor = cor;
 		this.placa = placa;
+		this.tipoVeiculo = (tipoVeiculo == null) ? null : tipoVeiculo.getCod();
 	}
 
 	public Integer getId() {
@@ -69,6 +74,14 @@ public class Veiculo implements Serializable {
 
 	public void setPlaca(String placa) {
 		this.placa = placa;
+	}
+	
+	public TipoVeiculo getTipoVeiculo() {
+		return TipoVeiculo.toEnum(tipoVeiculo);
+	}
+
+	public void setTipoVeiculo(TipoVeiculo tipoVeiculo) {
+		this.tipoVeiculo = tipoVeiculo.getCod();
 	}
 
 	@Override

@@ -10,6 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import com.estacionamento.vagas.domain.Empresa;
 import com.estacionamento.vagas.domain.Endereco;
 import com.estacionamento.vagas.domain.Veiculo;
+import com.estacionamento.vagas.domain.enums.TipoVeiculo;
 import com.estacionamento.vagas.repositories.EmpresaRepository;
 import com.estacionamento.vagas.repositories.EnderecoRepository;
 import com.estacionamento.vagas.repositories.VeiculoRepository;
@@ -45,8 +46,8 @@ public class EmpresaEstacionamentoApplication implements CommandLineRunner {
 		empresaRepository.save(emp);
 		enderecoRepository.save(end);
 		
-		Veiculo v1 = new Veiculo(null, "Chevrolet", "Onix", "Prata", "ONZ 3459");
-		Veiculo v2 = new Veiculo(null, "Kawazaki", "Ninja", "Verde", "CPX 4589");
+		Veiculo v1 = new Veiculo(null, "Chevrolet", "Onix", "Prata", "ONZ 3459", TipoVeiculo.CARRO);
+		Veiculo v2 = new Veiculo(null, "Kawazaki", "Ninja", "Verde", "CPX 4589", TipoVeiculo.MOTO);
 		
 		veiculoRepository.saveAll(Arrays.asList(v1,v2));
 		
