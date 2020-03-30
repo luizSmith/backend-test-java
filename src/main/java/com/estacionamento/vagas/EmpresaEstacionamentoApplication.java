@@ -9,10 +9,14 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.estacionamento.vagas.domain.Empresa;
 import com.estacionamento.vagas.domain.Endereco;
+import com.estacionamento.vagas.domain.VagaCarro;
+import com.estacionamento.vagas.domain.VagaMoto;
 import com.estacionamento.vagas.domain.Veiculo;
 import com.estacionamento.vagas.domain.enums.TipoVeiculo;
 import com.estacionamento.vagas.repositories.EmpresaRepository;
 import com.estacionamento.vagas.repositories.EnderecoRepository;
+import com.estacionamento.vagas.repositories.VagaCarroRepository;
+import com.estacionamento.vagas.repositories.VagaMotoRepository;
 import com.estacionamento.vagas.repositories.VeiculoRepository;
 
 @SpringBootApplication
@@ -26,7 +30,13 @@ public class EmpresaEstacionamentoApplication implements CommandLineRunner {
 		private EnderecoRepository enderecoRepository; 
 		
 		@Autowired
-		private VeiculoRepository veiculoRepository; 
+		private VeiculoRepository veiculoRepository;
+		
+		@Autowired
+		private VagaCarroRepository vagaCarroRepository;
+		
+		@Autowired
+		private VagaMotoRepository vagaMotoRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(EmpresaEstacionamentoApplication.class, args);
@@ -50,6 +60,24 @@ public class EmpresaEstacionamentoApplication implements CommandLineRunner {
 		Veiculo v2 = new Veiculo(null, "Kawazaki", "Ninja", "Verde", "CPX 4589", TipoVeiculo.MOTO);
 		
 		veiculoRepository.saveAll(Arrays.asList(v1,v2));
+		
+		VagaCarro vagc1 = new VagaCarro(null);
+		VagaCarro vagc2 = new VagaCarro(null);
+		
+		vagc1.setEmpresa(emp);
+		vagc2.setEmpresa(emp);
+		emp.getVagaCarro().addAll(Arrays.asList(vagc1,vagc2));
+		
+		vagaCarroRepository.saveAll(Arrays.asList(vagc1,vagc2));
+		
+		VagaMoto vagm1 = new VagaMoto(null);
+		VagaMoto vagm2 = new VagaMoto(null);
+		
+		vagm1.setEmpresa(emp);
+		vagm2.setEmpresa(emp);
+		emp.getVagaMoto().addAll(Arrays.asList(vagm1,vagm2));
+		
+		vagaMotoRepository.saveAll(Arrays.asList(vagm1,vagm2));
 		
 	}
 

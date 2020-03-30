@@ -98,6 +98,22 @@ public class Empresa implements Serializable {
 		this.endereco = endereco;
 	}
 
+	public List<VagaCarro> getVagaCarro() {
+		return vagaCarro;
+	}
+
+	public void setVagaCarro(List<VagaCarro> vagaCarro) {
+		this.vagaCarro = vagaCarro;
+	}
+
+	public List<VagaMoto> getVagaMoto() {
+		return vagaMoto;
+	}
+
+	public void setVagaMoto(List<VagaMoto> vagaMoto) {
+		this.vagaMoto = vagaMoto;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
