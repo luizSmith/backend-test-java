@@ -1,11 +1,31 @@
 package com.estacionamento.vagas.domain;
 
-public class Empresa {
+import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CollectionTable;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
+public class Empresa implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
 	private String cnpj;
 	
+	@ElementCollection
+	@CollectionTable(
+			name="TELEFONE"
+	)
+	private Set<String> telefones = new HashSet<>();
 	
 	public Empresa() {
 	}
@@ -39,6 +59,14 @@ public class Empresa {
 
 	public void setCnpj(String cnpj) {
 		this.cnpj = cnpj;
+	}
+	
+	public Set<String> getTelefones() {
+		return telefones;
+	}
+
+	public void setTelefones(Set<String> telefones) {
+		this.telefones = telefones;
 	}
 
 	@Override
