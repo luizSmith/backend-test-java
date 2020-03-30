@@ -1,6 +1,7 @@
 package com.estacionamento.vagas.resource;
 
 import java.net.URI;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -50,6 +51,12 @@ public class VeiculoResource {
 	public ResponseEntity<Void> delete(@PathVariable Integer id) {
 		service.delete(id);
 		return ResponseEntity.noContent().build();
+	}
+	
+	@RequestMapping(method=RequestMethod.GET)
+	public ResponseEntity<List<Veiculo>> findAll() {
+		List<Veiculo> list = service.findAll();
+		return ResponseEntity.ok().body(list);		
 	}
 	
 }

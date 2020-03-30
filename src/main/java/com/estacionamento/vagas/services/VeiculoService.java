@@ -1,5 +1,6 @@
 package com.estacionamento.vagas.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,14 @@ public class VeiculoService {
 		return repo.save(newObj);
 	}
 	
+	//methodo auxiliar
+	private void updateData(Veiculo newObj, Veiculo obj) {
+		newObj.setModelo(obj.getModelo());
+		newObj.setMarca(obj.getMarca());
+		newObj.setCor(obj.getCor());
+		newObj.setPlaca(obj.getPlaca());
+	}
+	
 	public void delete(Integer id) {
 		buscar(id);
 		try {
@@ -44,11 +53,9 @@ public class VeiculoService {
 		}
 	}
 	
-	//methodo auxiliar
-	private void updateData(Veiculo newObj, Veiculo obj) {
-		newObj.setModelo(obj.getModelo());
-		newObj.setMarca(obj.getMarca());
-		newObj.setCor(obj.getCor());
-		newObj.setPlaca(obj.getPlaca());
+	public List<Veiculo> findAll() {
+		return repo.findAll();
 	}
+	
+	
 }
