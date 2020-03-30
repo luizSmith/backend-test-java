@@ -22,4 +22,9 @@ public class VeiculoService {
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Veiculo.class.getName()
 			));
 	}
+	
+	public Veiculo insert(Veiculo obj) {
+		obj.setId(null);
+		return repo.save(obj);
+	}
 }
