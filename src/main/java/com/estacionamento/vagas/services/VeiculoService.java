@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.estacionamento.vagas.domain.Veiculo;
 import com.estacionamento.vagas.repositories.VeiculoRepository;
+import com.estacionamento.vagas.services.exception.DataIntegrityException;
 import com.estacionamento.vagas.services.exception.ObjectNotFoundException;
 
 @Service
@@ -35,6 +36,11 @@ public class VeiculoService {
 	
 	public void delete(Integer id) {
 		buscar(id);
-		repo.deleteById(id);
+		try {
+			repo.deleteById(id);
+		} catch(DataIntegrityException e) {
+			throw new DataIntegrityException(e.getMessage());
+		}
+		
 	}
 }
