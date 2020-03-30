@@ -2,8 +2,15 @@ package com.estacionamento.vagas.domain;
 
 import java.io.Serializable;
 
+import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.MapsId;
+import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+@Entity
 public class Endereco implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
@@ -15,10 +22,16 @@ public class Endereco implements Serializable {
 	private String bairro;
 	private String cep;
 	
+	@JsonIgnore
+	@OneToOne
+	@JoinColumn(name="empresa_id")
+	@MapsId
+	private Empresa empresa;
+	
 	public Endereco() {
 	}
 
-	public Endereco(Integer id, String longradouro, String numero, String complemento, String bairro, String cep) {
+	public Endereco(Integer id, String longradouro, String numero, String complemento, String bairro, String cep, Empresa empresa) {
 		super();
 		this.id = id;
 		this.longradouro = longradouro;
@@ -26,6 +39,7 @@ public class Endereco implements Serializable {
 		this.complemento = complemento;
 		this.bairro = bairro;
 		this.cep = cep;
+		this.empresa = empresa;
 	}
 
 	public Integer getId() {
@@ -74,6 +88,14 @@ public class Endereco implements Serializable {
 
 	public void setCep(String cep) {
 		this.cep = cep;
+	}
+
+	public Empresa getEmpresa() {
+		return empresa;
+	}
+
+	public void setEmpresa(Empresa empresa) {
+		this.empresa = empresa;
 	}
 
 	@Override

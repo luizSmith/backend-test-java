@@ -4,12 +4,14 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Empresa implements Serializable {
@@ -26,6 +28,12 @@ public class Empresa implements Serializable {
 			name="TELEFONE"
 	)
 	private Set<String> telefones = new HashSet<>();
+	
+	@OneToOne(
+			cascade=CascadeType.ALL,
+			mappedBy = "empresa"
+	)
+	private Endereco endereco;
 	
 	public Empresa() {
 	}
@@ -67,6 +75,14 @@ public class Empresa implements Serializable {
 
 	public void setTelefones(Set<String> telefones) {
 		this.telefones = telefones;
+	}
+	
+	public Endereco getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
 	}
 
 	@Override
