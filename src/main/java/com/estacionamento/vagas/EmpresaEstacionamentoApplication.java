@@ -61,20 +61,16 @@ public class EmpresaEstacionamentoApplication implements CommandLineRunner {
 		
 		veiculoRepository.saveAll(Arrays.asList(v1,v2));
 		
-		VagaCarro vagc1 = new VagaCarro(null);
-		VagaCarro vagc2 = new VagaCarro(null);
+		VagaCarro vagc1 = new VagaCarro(null, emp);
+		VagaCarro vagc2 = new VagaCarro(null, emp);
 		
-		vagc1.setEmpresa(emp);
-		vagc2.setEmpresa(emp);
 		emp.getVagaCarro().addAll(Arrays.asList(vagc1,vagc2));
 		
 		vagaCarroRepository.saveAll(Arrays.asList(vagc1,vagc2));
 		
-		VagaMoto vagm1 = new VagaMoto(null);
-		VagaMoto vagm2 = new VagaMoto(null);
+		VagaMoto vagm1 = new VagaMoto(null, emp);
+		VagaMoto vagm2 = new VagaMoto(null, emp);
 		
-		vagm1.setEmpresa(emp);
-		vagm2.setEmpresa(emp);
 		emp.getVagaMoto().addAll(Arrays.asList(vagm1,vagm2));
 		
 		vagaMotoRepository.saveAll(Arrays.asList(vagm1,vagm2));
