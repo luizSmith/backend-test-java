@@ -1,10 +1,15 @@
 package com.estacionamento.vagas.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.estacionamento.vagas.domain.Empresa;
@@ -17,6 +22,7 @@ import com.estacionamento.vagas.repositories.EmpresaRepository;
 import com.estacionamento.vagas.repositories.EnderecoRepository;
 import com.estacionamento.vagas.repositories.VagaCarroRepository;
 import com.estacionamento.vagas.repositories.VagaMotoRepository;
+import com.estacionamento.vagas.services.exception.DataIntegrityException;
 import com.estacionamento.vagas.services.exception.ObjectNotFoundException;
 
 @Service
@@ -76,13 +82,40 @@ public class EmpresaService {
 			emp.getVagaCarro().add(vagc);
 		}
 		
-		
 		for (int j = 1; j <= objDTO.getnVagaMoto() ; j++) {
 			VagaMoto vagm = new VagaMoto(null, emp, StatusVaga.toEnum(1));
 			emp.getVagaMoto().add(vagm);
 		}
 		
 		return emp;
+	}
+	
+	//delete
+	public void delete(Integer id) {
+		buscar(id);
+		
+		try {
+			repo.deleteById(id);				
+		} catch (DataIntegrityViolationException e) {
+			throw new DataIntegrityException("Não é possivel Excluir uma empresa que possui Vagas");
+		}
+	}
+	
+	//retorna todos
+	public List<Empresa> findAll(){
+		return repo.findAll();
+	}
+	
+	//Paginacao
+	/*
+	 * page: Nº pagina;
+	 * linesPerPage: Nº linhas p/ pagina
+	 * orderBy: Qual atributo vai ser utilizado para ordenar
+	 * direction: DESC || ASC
+	*/
+	public Page<Empresa> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
+		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction),orderBy);
+		return repo.findAll(pageRequest);
 	}
 	
 }
