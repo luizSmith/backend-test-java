@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.estacionamento.vagas.domain.VagaCarro;
+import com.estacionamento.vagas.dto.VagaDTO;
 import com.estacionamento.vagas.dto.VagaNewDTO;
 import com.estacionamento.vagas.services.VagaCarroService;
 
@@ -43,6 +44,16 @@ public class VagaCarroResource {
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
 				.path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
+	}
+	
+	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
+	public ResponseEntity<Void> update(@Valid @RequestBody VagaDTO objDTO, @PathVariable Integer id) {
+		
+		VagaCarro obj = service.fromDTO(objDTO);
+		
+		obj.setId(id);
+		obj = service.update(obj);
+		return ResponseEntity.noContent().build();
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
