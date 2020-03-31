@@ -1,6 +1,7 @@
 package com.estacionamento.vagas.resource;
 
 import java.net.URI;
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -48,5 +49,11 @@ public class VagaMotoResource {
 	public ResponseEntity<Void> delete(@PathVariable Integer id) {
 		service.delete(id);
 		return ResponseEntity.noContent().build();
+	}
+	
+	@RequestMapping(method=RequestMethod.GET)
+	public ResponseEntity<List<VagaMoto>> findAll() {
+		List<VagaMoto> list = service.findAll();
+		return ResponseEntity.ok().body(list);		
 	}
 }
