@@ -1,5 +1,6 @@
 package com.estacionamento.vagas.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,5 +44,9 @@ public class VagaCarroService {
 		} catch(DataIntegrityException e) {
 			throw new DataIntegrityException(e.getMessage());
 		}
+	}
+	
+	public List<VagaCarro> findAll() {
+		return repo.findAll();
 	}
 }
