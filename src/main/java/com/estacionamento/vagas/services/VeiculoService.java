@@ -10,6 +10,8 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.estacionamento.vagas.domain.Veiculo;
+import com.estacionamento.vagas.domain.enums.TipoVeiculo;
+import com.estacionamento.vagas.dto.VeiculoNewDTO;
 import com.estacionamento.vagas.repositories.VeiculoRepository;
 import com.estacionamento.vagas.services.exception.DataIntegrityException;
 import com.estacionamento.vagas.services.exception.ObjectNotFoundException;
@@ -70,5 +72,9 @@ public class VeiculoService {
 	public Page<Veiculo> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction),orderBy);
 		return repo.findAll(pageRequest);
+	}
+	
+	public Veiculo fromDTO(VeiculoNewDTO objDTO) {
+		return new Veiculo(objDTO.getId(), objDTO.getMarca(), objDTO.getModelo(), objDTO.getCor(), objDTO.getPlaca(), TipoVeiculo.toEnum(objDTO.getTipoVeiculo()));
 	}
 }
