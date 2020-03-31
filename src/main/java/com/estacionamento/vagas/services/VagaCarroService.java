@@ -5,7 +5,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.estacionamento.vagas.domain.Empresa;
 import com.estacionamento.vagas.domain.VagaCarro;
+import com.estacionamento.vagas.dto.VagaCarroNewDTO;
 import com.estacionamento.vagas.repositories.VagaCarroRepository;
 import com.estacionamento.vagas.services.exception.ObjectNotFoundException;
 
@@ -21,5 +23,15 @@ public class VagaCarroService {
 		return obj.orElseThrow(() -> new ObjectNotFoundException( //se a busca retorne null
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + VagaCarro.class.getName()
 			));
+	}
+	
+	public VagaCarro insert(VagaCarro obj) {
+		obj.setId(null);
+		return repo.save(obj);
+	}
+	
+	public VagaCarro fromDTO(VagaCarroNewDTO objDTO) {
+		Empresa emp = new Empresa(objDTO.getEmpresaId(), null, null);
+		return new VagaCarro(null, emp);
 	}
 }
