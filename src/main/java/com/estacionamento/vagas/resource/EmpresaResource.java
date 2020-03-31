@@ -2,6 +2,8 @@ package com.estacionamento.vagas.resource;
 
 import java.net.URI;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.estacionamento.vagas.domain.Empresa;
+import com.estacionamento.vagas.dto.EmpresaNewDTO;
 import com.estacionamento.vagas.services.EmpresaService;
 
 @RestController //diz que ele é um controlador REST
@@ -32,8 +35,16 @@ public class EmpresaResource {
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)
-	public ResponseEntity<Void> insert(@RequestBody Empresa obj) {
+	public ResponseEntity<Void> insert(@Valid @RequestBody EmpresaNewDTO objDTO) {
+		
+		Empresa obj = service.fromDTO(objDTO);
+		
 		obj = service.insert(obj);
+		
+		//Definir resposta da URI
+		// fromCurrentRequest:pega o valor da url
+		// buildAndExpand: atribui o valor
+		// toUri: converte o valor para uri
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
 				.path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
