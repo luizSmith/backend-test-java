@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.estacionamento.vagas.domain.Empresa;
 import com.estacionamento.vagas.domain.VagaCarro;
+import com.estacionamento.vagas.domain.enums.StatusVaga;
 import com.estacionamento.vagas.dto.VagaNewDTO;
 import com.estacionamento.vagas.repositories.VagaCarroRepository;
 import com.estacionamento.vagas.services.exception.DataIntegrityException;
@@ -34,7 +35,7 @@ public class VagaCarroService {
 	
 	public VagaCarro fromDTO(VagaNewDTO objDTO) {
 		Empresa emp = new Empresa(objDTO.getEmpresaId(), null, null);
-		return new VagaCarro(null, emp);
+		return new VagaCarro(null, emp, StatusVaga.toEnum(1));
 	}
 	
 	public void delete(Integer id) {

@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.estacionamento.vagas.domain.enums.StatusVaga;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -18,6 +19,8 @@ public class VagaMoto implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
+	
+	private Integer statusVaga;
 	
 	@JsonIgnore
 	@ManyToOne
@@ -29,10 +32,11 @@ public class VagaMoto implements Serializable {
 	public VagaMoto() {
 	}
 	
-	public VagaMoto(Integer id, Empresa empresa) {
+	public VagaMoto(Integer id, Empresa empresa, StatusVaga statusVaga) {
 		super();
 		this.id = id;
 		this.empresa = empresa;
+		this.statusVaga = (statusVaga == null) ? null : statusVaga.getCod();
 	}
 
 	public Integer getId() {
@@ -49,6 +53,14 @@ public class VagaMoto implements Serializable {
 
 	public void setEmpresa(Empresa empresa) {
 		this.empresa = empresa;
+	}
+	
+	public StatusVaga getStatusVaga() {
+		return StatusVaga.toEnum(statusVaga);
+	}
+
+	public void setStatusVaga(StatusVaga statusVaga) {
+		this.statusVaga = statusVaga.getCod();
 	}
 
 	@Override

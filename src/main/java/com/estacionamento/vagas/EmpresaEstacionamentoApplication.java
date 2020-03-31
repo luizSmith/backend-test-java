@@ -12,6 +12,7 @@ import com.estacionamento.vagas.domain.Endereco;
 import com.estacionamento.vagas.domain.VagaCarro;
 import com.estacionamento.vagas.domain.VagaMoto;
 import com.estacionamento.vagas.domain.Veiculo;
+import com.estacionamento.vagas.domain.enums.StatusVaga;
 import com.estacionamento.vagas.domain.enums.TipoVeiculo;
 import com.estacionamento.vagas.repositories.EmpresaRepository;
 import com.estacionamento.vagas.repositories.EnderecoRepository;
@@ -61,15 +62,15 @@ public class EmpresaEstacionamentoApplication implements CommandLineRunner {
 		
 		veiculoRepository.saveAll(Arrays.asList(v1,v2));
 		
-		VagaCarro vagc1 = new VagaCarro(null, emp);
-		VagaCarro vagc2 = new VagaCarro(null, emp);
+		VagaCarro vagc1 = new VagaCarro(null, emp, StatusVaga.DISPONIVEL);
+		VagaCarro vagc2 = new VagaCarro(null, emp, StatusVaga.DISPONIVEL);
 		
 		emp.getVagaCarro().addAll(Arrays.asList(vagc1,vagc2));
 		
 		vagaCarroRepository.saveAll(Arrays.asList(vagc1,vagc2));
 		
-		VagaMoto vagm1 = new VagaMoto(null, emp);
-		VagaMoto vagm2 = new VagaMoto(null, emp);
+		VagaMoto vagm1 = new VagaMoto(null, emp, StatusVaga.DISPONIVEL);
+		VagaMoto vagm2 = new VagaMoto(null, emp, StatusVaga.DISPONIVEL);
 		
 		emp.getVagaMoto().addAll(Arrays.asList(vagm1,vagm2));
 		
