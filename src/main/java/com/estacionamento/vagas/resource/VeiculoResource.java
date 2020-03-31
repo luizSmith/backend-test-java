@@ -42,6 +42,10 @@ public class VeiculoResource {
 		Veiculo obj = service.fromDTO(objDTO);
 		
 		obj = service.insert(obj);
+		//Definir resposta da URI
+		// fromCurrentRequest:pega o valor da url
+		// buildAndExpand: atribui o valor
+		// toUri: converte o valor para uri
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
 				.path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
