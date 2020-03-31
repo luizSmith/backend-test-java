@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.estacionamento.vagas.domain.Empresa;
 import com.estacionamento.vagas.domain.VagaCarro;
-import com.estacionamento.vagas.dto.VagaCarroNewDTO;
+import com.estacionamento.vagas.dto.VagaNewDTO;
 import com.estacionamento.vagas.repositories.VagaCarroRepository;
 import com.estacionamento.vagas.services.exception.ObjectNotFoundException;
 
@@ -30,7 +30,7 @@ public class VagaCarroService {
 		return repo.save(obj);
 	}
 	
-	public VagaCarro fromDTO(VagaCarroNewDTO objDTO) {
+	public VagaCarro fromDTO(VagaNewDTO objDTO) {
 		Empresa emp = new Empresa(objDTO.getEmpresaId(), null, null);
 		return new VagaCarro(null, emp);
 	}

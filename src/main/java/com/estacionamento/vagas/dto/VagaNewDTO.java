@@ -2,14 +2,14 @@ package com.estacionamento.vagas.dto;
 
 import javax.validation.constraints.NotNull;
 
-public class VagaCarroNewDTO {
+public class VagaNewDTO {
 	
 	private Integer id;
 	
 	@NotNull(message="Preenchimento obrigatorio") //nao pode ser vazio
 	private Integer empresaId;
 	
-	public VagaCarroNewDTO() {
+	public VagaNewDTO() {
 		
 	}
 

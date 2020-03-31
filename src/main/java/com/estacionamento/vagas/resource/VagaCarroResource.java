@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.estacionamento.vagas.domain.VagaCarro;
-import com.estacionamento.vagas.dto.VagaCarroNewDTO;
+import com.estacionamento.vagas.dto.VagaNewDTO;
 import com.estacionamento.vagas.services.VagaCarroService;
 
 @RestController //diz que ele é um controlador REST
@@ -35,7 +35,7 @@ public class VagaCarroResource {
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)
-	public ResponseEntity<Void> insert(@Valid @RequestBody VagaCarroNewDTO objDTO) {
+	public ResponseEntity<Void> insert(@Valid @RequestBody VagaNewDTO objDTO) {
 		VagaCarro obj = service.fromDTO(objDTO);
 		
 		obj = service.insert(obj);
