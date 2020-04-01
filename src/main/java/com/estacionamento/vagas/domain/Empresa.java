@@ -8,6 +8,7 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
+import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,7 +24,11 @@ public class Empresa implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
+	
+	@Column(unique=true)
 	private String nome;
+	
+	@Column(unique=true)
 	private String cnpj;
 	
 	@ElementCollection
@@ -33,7 +38,7 @@ public class Empresa implements Serializable {
 	private Set<String> telefones = new HashSet<>();
 	
 	@OneToOne(
-			cascade=CascadeType.ALL,
+			cascade=CascadeType.ALL, //Permite que delete os endereços junto com a Empresa
 			mappedBy = "empresa"
 	)
 	private Endereco endereco;

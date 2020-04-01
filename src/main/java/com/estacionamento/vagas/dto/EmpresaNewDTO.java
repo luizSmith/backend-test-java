@@ -4,6 +4,11 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.br.CNPJ;
+
+import com.estacionamento.vagas.services.validation.EmpresaInsert;
+
+@EmpresaInsert
 public class EmpresaNewDTO {
 	
 	private Integer id;
@@ -12,6 +17,7 @@ public class EmpresaNewDTO {
 	private String nome;
 	
 	@NotEmpty(message="Preenchimento obrigatorio") //nao pode ser vazio
+	@CNPJ(message="CNPJ invalido")
 	private String cnpj;
 	
 	@NotEmpty(message="Preenchimento obrigatorio") //nao pode ser vazio
