@@ -13,7 +13,7 @@ public class EmpresaDTO {
 	private String nome;
 	
 	private String cnpj;
-	/*
+	
 	@NotEmpty(message="Preenchimento obrigatorio") //nao pode ser vazio
 	private String longradouro;
 	
@@ -32,7 +32,7 @@ public class EmpresaDTO {
 	private String telefone1;
 	
 	private String telefone2;
-	*/
+	
 	public EmpresaDTO() {
 		
 	}
@@ -60,7 +60,7 @@ public class EmpresaDTO {
 	public void setCnpj(String cnpj) {
 		this.cnpj = cnpj;
 	}
-	/*
+	
 	public String getLongradouro() {
 		return longradouro;
 	}
@@ -116,5 +116,5 @@ public class EmpresaDTO {
 	public void setTelefone2(String telefone2) {
 		this.telefone2 = telefone2;
 	}
-	*/
+	
 }

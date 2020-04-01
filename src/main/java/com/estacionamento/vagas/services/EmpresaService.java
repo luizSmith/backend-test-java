@@ -91,12 +91,13 @@ public class EmpresaService {
 		return emp;
 	}
 	
+	@Transactional
 	public Empresa update(Empresa obj) {
 		Empresa newObj = buscarId(obj.getId());
 		updateData(newObj, obj);
 		
 		repo.save(newObj);
-		//enderecoRepository.save(newObj.getEndereco());
+		enderecoRepository.save(newObj.getEndereco());
 		
 		return newObj;
 	}
@@ -105,11 +106,21 @@ public class EmpresaService {
 	private void updateData(Empresa newObj, Empresa obj) {
 		newObj.setNome(obj.getNome());
 		
-		//newObj.setEndereco(obj.getEndereco());
+		Endereco end = newObj.getEndereco();
+		end.setBairro(obj.getEndereco().getBairro());
+		end.setCep(obj.getEndereco().getCep());
+		end.setComplemento(obj.getEndereco().getComplemento());
+		end.setLongradouro(obj.getEndereco().getLongradouro());
+		end.setNumero(obj.getEndereco().getNumero());
+		
+		newObj.setEndereco(end);
 	}
 	
 	public Empresa fromDTO(EmpresaDTO objDTO) {
 		Empresa emp = new Empresa(objDTO.getId(), objDTO.getNome(), null);
+		Endereco end = new Endereco(null, objDTO.getLongradouro(), objDTO.getNumero(), objDTO.getComplemento(), objDTO.getBairro(), objDTO.getCep(), emp);
+		emp.setEndereco(end);
+		
 		return emp;
 	}
 	
