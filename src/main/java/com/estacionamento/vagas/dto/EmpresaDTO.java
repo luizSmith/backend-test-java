@@ -1,11 +1,14 @@
 package com.estacionamento.vagas.dto;
 
+import java.io.Serializable;
+
 import javax.validation.constraints.NotEmpty;
 
 import com.estacionamento.vagas.services.validation.EmpresaUpdate;
 
 @EmpresaUpdate
-public class EmpresaDTO {
+public class EmpresaDTO implements Serializable {
+	private static final long serialVersionUID = 1L;
 	
 	private Integer id;
 	

@@ -1,8 +1,11 @@
 package com.estacionamento.vagas.dto;
 
+import java.io.Serializable;
+
 import javax.validation.constraints.NotNull;
 
-public class VagaDTO {
+public class VagaDTO implements Serializable {
+	private static final long serialVersionUID = 1L;
 	
 	private Integer id;
 	

@@ -1,5 +1,7 @@
 package com.estacionamento.vagas.dto;
 
+import java.io.Serializable;
+
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -9,7 +11,8 @@ import org.hibernate.validator.constraints.br.CNPJ;
 import com.estacionamento.vagas.services.validation.EmpresaInsert;
 
 @EmpresaInsert
-public class EmpresaNewDTO {
+public class EmpresaNewDTO implements Serializable {
+	private static final long serialVersionUID = 1L;
 	
 	private Integer id;
 	
