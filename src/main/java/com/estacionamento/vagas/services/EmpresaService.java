@@ -17,6 +17,7 @@ import com.estacionamento.vagas.domain.Endereco;
 import com.estacionamento.vagas.domain.VagaCarro;
 import com.estacionamento.vagas.domain.VagaMoto;
 import com.estacionamento.vagas.domain.enums.StatusVaga;
+import com.estacionamento.vagas.dto.EmpresaDTO;
 import com.estacionamento.vagas.dto.EmpresaNewDTO;
 import com.estacionamento.vagas.repositories.EmpresaRepository;
 import com.estacionamento.vagas.repositories.EnderecoRepository;
@@ -87,6 +88,28 @@ public class EmpresaService {
 			emp.getVagaMoto().add(vagm);
 		}
 		
+		return emp;
+	}
+	
+	public Empresa update(Empresa obj) {
+		Empresa newObj = buscar(obj.getId());
+		updateData(newObj, obj);
+		
+		repo.save(newObj);
+		//enderecoRepository.save(newObj.getEndereco());
+		
+		return newObj;
+	}
+	
+	//methodo auxiliar
+	private void updateData(Empresa newObj, Empresa obj) {
+		newObj.setNome(obj.getNome());
+		
+		//newObj.setEndereco(obj.getEndereco());
+	}
+	
+	public Empresa fromDTO(EmpresaDTO objDTO) {
+		Empresa emp = new Empresa(objDTO.getId(), objDTO.getNome(), null);
 		return emp;
 	}
 	

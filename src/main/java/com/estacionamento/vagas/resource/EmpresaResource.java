@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.estacionamento.vagas.domain.Empresa;
+import com.estacionamento.vagas.dto.EmpresaDTO;
 import com.estacionamento.vagas.dto.EmpresaNewDTO;
 import com.estacionamento.vagas.services.EmpresaService;
 
@@ -51,6 +52,16 @@ public class EmpresaResource {
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
 				.path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
+	}
+	
+	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
+	public ResponseEntity<Void> update(@Valid @RequestBody EmpresaDTO objDTO, @PathVariable Integer id) {
+		
+		Empresa obj = service.fromDTO(objDTO);
+		
+		obj.setId(id);
+		obj = service.update(obj);
+		return ResponseEntity.noContent().build();
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
