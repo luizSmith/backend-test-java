@@ -2,6 +2,7 @@ package com.estacionamento.vagas.services.validation;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
@@ -40,6 +41,10 @@ public class EmpresaInsertValidator implements ConstraintValidator<EmpresaInsert
 			list.add(new FieldMessage("cnpj", "CNPJ já existe"));
 		}
 		
+		Optional<Empresa> auxId = repo.findById(1);
+		if (auxId.isPresent()) {
+			list.add(new FieldMessage("Empresa", "Só pode haver uma Empresa"));
+		}
 
 		for (FieldMessage e : list) { //percorre a lista de erro e adiciona o erro personalizado na lista de erros do framework
 			context.disableDefaultConstraintViolation();

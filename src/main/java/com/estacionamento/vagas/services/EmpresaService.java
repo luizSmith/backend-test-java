@@ -42,7 +42,7 @@ public class EmpresaService {
 	@Autowired
 	private VagaMotoRepository vagaMotoRepository;
 	
-	public Empresa buscar(Integer id) {
+	public Empresa buscarId(Integer id) {
 		Optional<Empresa> obj = repo.findById(id);
 		
 		return obj.orElseThrow(() -> new ObjectNotFoundException( //se a busca retorne null
@@ -92,7 +92,7 @@ public class EmpresaService {
 	}
 	
 	public Empresa update(Empresa obj) {
-		Empresa newObj = buscar(obj.getId());
+		Empresa newObj = buscarId(obj.getId());
 		updateData(newObj, obj);
 		
 		repo.save(newObj);
@@ -115,7 +115,7 @@ public class EmpresaService {
 	
 	//delete
 	public void delete(Integer id) {
-		buscar(id);
+		buscarId(id);
 		
 		try {
 			repo.deleteById(id);				

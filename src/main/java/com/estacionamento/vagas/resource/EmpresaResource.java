@@ -33,7 +33,7 @@ public class EmpresaResource {
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	public ResponseEntity<Empresa> find(@PathVariable Integer id) {
 		
-		Empresa obj = service.buscar(id);
+		Empresa obj = service.buscarId(id);
 		return ResponseEntity.ok().body(obj); //ele vai responder de acordo com o obj de resposta entity
 	
 	}
