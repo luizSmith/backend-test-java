@@ -5,6 +5,9 @@ import java.io.Serializable;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import com.estacionamento.vagas.services.validation.VeiculoInsert;
+
+@VeiculoInsert
 public class VeiculoNewDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	

@@ -9,7 +9,7 @@ import com.estacionamento.vagas.domain.Empresa;
 @Repository
 public interface EmpresaRepository extends JpaRepository<Empresa, Integer>{
 	
-	@Transactional(readOnly=true)
+	@Transactional(readOnly=true)  //Não precisa ser envolvida com uma transação do banco
 	Empresa findByNome(String nome);
 	
 	@Transactional(readOnly=true)
