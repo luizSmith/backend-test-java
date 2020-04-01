@@ -32,8 +32,8 @@ public class VagaCarro implements Serializable {
 	)
 	private Empresa empresa;
 	
-	@OneToMany(mappedBy = "id.vagaCarro")
-	private Set<ControleVeiculoVagaCarro> controle = new HashSet<>();	
+	@OneToMany(mappedBy="id.vagaCarro")
+	private Set<ControleVeiculoVagaCarro> controle = new HashSet<>();
 	
 	public VagaCarro() {
 	}

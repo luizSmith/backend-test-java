@@ -13,8 +13,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class ControleVeiculoVagaCarro implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	@JsonIgnore
+	
 	@EmbeddedId // por ser uma chave  composta
+	@JsonIgnore
 	private ControleVeiculoVagaCarroPK id = new ControleVeiculoVagaCarroPK();
 	
 	@JsonFormat(pattern="dd/MM/yyyy HH:mm")
@@ -23,15 +24,40 @@ public class ControleVeiculoVagaCarro implements Serializable {
 	@JsonFormat(pattern="dd/MM/yyyy HH:mm")
 	private Date saida;
 	
-	ControleVeiculoVagaCarro(){
-	}
+	public ControleVeiculoVagaCarro(){
+	}	
 
 	public ControleVeiculoVagaCarro(VagaCarro vagaCarro, Veiculo veiculo, Date entrada) {
 		super();
 		id.setVagaCarro(vagaCarro);
 		id.setVeiculo(veiculo);
-		
+
 		this.entrada = entrada;
+	}
+	
+	@JsonIgnore
+	public VagaCarro getVagaCarro() {
+		return id.getVagaCarro();
+	}
+
+	public void setVagaCarro(VagaCarro vagaCarro) {
+		id.setVagaCarro(vagaCarro);
+	}
+
+	public Veiculo getVeiculo() {
+		return id.getVeiculo();
+	}
+
+	public void setVeiculo(Veiculo veiculo) {
+		id.setVeiculo(veiculo);
+	}
+
+	public ControleVeiculoVagaCarroPK getId() {
+		return id;
+	}
+
+	public void setId(ControleVeiculoVagaCarroPK id) {
+		this.id = id;
 	}
 
 	public Date getEntrada() {
@@ -49,29 +75,6 @@ public class ControleVeiculoVagaCarro implements Serializable {
 	public void setSaida(Date saida) {
 		this.saida = saida;
 	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		ControleVeiculoVagaCarro other = (ControleVeiculoVagaCarro) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		return true;
-	}	
+	
+	
 }

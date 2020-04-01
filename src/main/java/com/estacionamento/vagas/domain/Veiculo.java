@@ -1,13 +1,17 @@
 package com.estacionamento.vagas.domain;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import com.estacionamento.vagas.domain.enums.TipoVeiculo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Veiculo implements Serializable {
@@ -22,6 +26,10 @@ public class Veiculo implements Serializable {
 	private String placa;
 	
 	private Integer tipoVeiculo;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy="id.veiculo")
+	private Set<ControleVeiculoVagaCarro> controle = new HashSet<>();	
 	
 	public Veiculo() {
 	}
@@ -82,6 +90,14 @@ public class Veiculo implements Serializable {
 
 	public void setTipoVeiculo(TipoVeiculo tipoVeiculo) {
 		this.tipoVeiculo = tipoVeiculo.getCod();
+	}
+
+	public Set<ControleVeiculoVagaCarro> getControle() {
+		return controle;
+	}
+
+	public void setControle(Set<ControleVeiculoVagaCarro> controle) {
+		this.controle = controle;
 	}
 
 	@Override

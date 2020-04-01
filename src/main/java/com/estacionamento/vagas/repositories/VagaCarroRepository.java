@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.estacionamento.vagas.domain.VagaCarro;
 
 @Repository
-public interface VagaCarroRepository extends JpaRepository<VagaCarro, Integer>{
+public interface VagaCarroRepository extends JpaRepository<VagaCarro, Integer> {
 
 }

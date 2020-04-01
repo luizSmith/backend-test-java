@@ -85,11 +85,18 @@ public class EmpresaEstacionamentoApplication implements CommandLineRunner {
 		//pegar data e hora
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyy HH:mm");
 		
+		
 		ControleVeiculoVagaCarro cvc = new ControleVeiculoVagaCarro(vagc1, v1, sdf.parse("30/09/2019 12:45"));
 		
+	
+		
 		controleVeiculoVagaCarroRepository.save(cvc);
+		
 		vagc1.setStatusVaga(StatusVaga.OCUPADA);
+		
 		vagaCarroRepository.save(vagc1);
+
+		
 		
 	}
 
