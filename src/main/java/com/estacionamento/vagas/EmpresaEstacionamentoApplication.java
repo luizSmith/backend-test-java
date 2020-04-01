@@ -1,5 +1,6 @@
 package com.estacionamento.vagas;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.estacionamento.vagas.domain.ControleVeiculoVagaCarro;
 import com.estacionamento.vagas.domain.Empresa;
 import com.estacionamento.vagas.domain.Endereco;
 import com.estacionamento.vagas.domain.VagaCarro;
@@ -14,6 +16,7 @@ import com.estacionamento.vagas.domain.VagaMoto;
 import com.estacionamento.vagas.domain.Veiculo;
 import com.estacionamento.vagas.domain.enums.StatusVaga;
 import com.estacionamento.vagas.domain.enums.TipoVeiculo;
+import com.estacionamento.vagas.repositories.ControleVeiculoVagaCarroRepository;
 import com.estacionamento.vagas.repositories.EmpresaRepository;
 import com.estacionamento.vagas.repositories.EnderecoRepository;
 import com.estacionamento.vagas.repositories.VagaCarroRepository;
@@ -38,6 +41,9 @@ public class EmpresaEstacionamentoApplication implements CommandLineRunner {
 		
 		@Autowired
 		private VagaMotoRepository vagaMotoRepository;
+		
+		@Autowired
+		private ControleVeiculoVagaCarroRepository controleVeiculoVagaCarroRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(EmpresaEstacionamentoApplication.class, args);
@@ -74,7 +80,16 @@ public class EmpresaEstacionamentoApplication implements CommandLineRunner {
 		
 		emp.getVagaMoto().addAll(Arrays.asList(vagm1,vagm2));
 		
-		vagaMotoRepository.saveAll(Arrays.asList(vagm1,vagm2));
+		vagaMotoRepository.saveAll(Arrays.asList(vagm1,vagm2));		
+		
+		//pegar data e hora
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyy HH:mm");
+		
+		ControleVeiculoVagaCarro cvc = new ControleVeiculoVagaCarro(vagc1, v1, sdf.parse("30/09/2019 12:45"));
+		
+		controleVeiculoVagaCarroRepository.save(cvc);
+		vagc1.setStatusVaga(StatusVaga.OCUPADA);
+		vagaCarroRepository.save(vagc1);
 		
 	}
 
