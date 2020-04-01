@@ -9,7 +9,6 @@ public class VagaNewDTO {
 	@NotNull(message="Preenchimento obrigatorio") //nao pode ser vazio
 	private Integer empresaId;
 	
-	@NotNull(message="Preenchimento obrigatorio") //nao pode ser vazio
 	private Integer statusVaga;
 	
 	public VagaNewDTO() {
