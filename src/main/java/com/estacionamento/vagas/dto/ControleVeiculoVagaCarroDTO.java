@@ -10,8 +10,7 @@ public class ControleVeiculoVagaCarroDTO implements Serializable {
 	
 	@NotNull(message="Preenchimento obrigatorio")
 	private Integer vagaCarroId; 
-	
-	@NotNull(message="Preenchimento obrigatorio")
+
 	private Date saida;
 	
 	public ControleVeiculoVagaCarroDTO () {

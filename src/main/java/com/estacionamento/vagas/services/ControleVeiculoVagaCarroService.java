@@ -12,6 +12,7 @@ import com.estacionamento.vagas.domain.ControleVeiculoVagaCarro;
 import com.estacionamento.vagas.domain.VagaCarro;
 import com.estacionamento.vagas.domain.Veiculo;
 import com.estacionamento.vagas.domain.enums.StatusVaga;
+import com.estacionamento.vagas.dto.ControleVeiculoVagaCarroDTO;
 import com.estacionamento.vagas.dto.ControleVeiculoVagaCarroNewDTO;
 import com.estacionamento.vagas.repositories.ControleVeiculoVagaCarroRepository;
 import com.estacionamento.vagas.repositories.VagaCarroRepository;
@@ -62,30 +63,33 @@ public class ControleVeiculoVagaCarroService {
 			
 			return cvc;
 		}
-		/*
+		
 		@Transactional
 		public ControleVeiculoVagaCarro update(ControleVeiculoVagaCarro obj) {
-			ControleVeiculoVagaCarro newObj = buscarId(obj.getId());
+			ControleVeiculoVagaCarro newObj = repo.buscaControle(obj.getVagaCarro().getId());
+			
 			updateData(newObj, obj);
 			
-			repo.save(newObj);
+			repo.save(newObj);			
+			
+			VagaCarro vagc = newObj.getVagaCarro();
+			vagc.setStatusVaga(StatusVaga.DISPONIVEL);
+			
+			vagaCarroRepository.save(vagc);
 			
 			return newObj;
 		}
 		
 		//methodo auxiliar
 		private void updateData(ControleVeiculoVagaCarro newObj, ControleVeiculoVagaCarro obj) {
-			newObj.setSaida(obj.getSaida());
-			newObj.getVagaCarro().setStatusVaga(StatusVaga.DISPONIVEL);	
+			newObj.setSaida(new Date());
 		}
 		
 		public ControleVeiculoVagaCarro fromDTO(ControleVeiculoVagaCarroDTO objDTO) {
-			Empresa emp = new Empresa(objDTO.getId(), objDTO.getNome(), null);
-			Endereco end = new Endereco(null, objDTO.getLongradouro(), objDTO.getNumero(), objDTO.getComplemento(), objDTO.getBairro(), objDTO.getCep(), emp);
-			emp.setEndereco(end);
+			VagaCarro vagc = vagaCarroService.buscar(objDTO.getVagaCarroId());
 			
-			return emp;
+			return new ControleVeiculoVagaCarro(vagc, null, null);
 		}
-		*/
+		
 		
 }

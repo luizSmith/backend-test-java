@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.estacionamento.vagas.domain.ControleVeiculoVagaCarro;
+import com.estacionamento.vagas.dto.ControleVeiculoVagaCarroDTO;
 import com.estacionamento.vagas.dto.ControleVeiculoVagaCarroNewDTO;
 import com.estacionamento.vagas.services.ControleVeiculoVagaCarroService;
 
@@ -21,20 +22,7 @@ import com.estacionamento.vagas.services.ControleVeiculoVagaCarroService;
 public class ControleVeiculoVagaCarroResource {
 	
 	@Autowired
-	private ControleVeiculoVagaCarroService service;
-	
-	//para ser uma requisicao esta funcao deve ser associada a um dos verbos do HTTP
-	//status:200 
-	/*
-	@RequestMapping(value="/{id}", method=RequestMethod.GET)
-	public ResponseEntity<ControleVeiculoVagaCarro> find(@PathVariable Integer id) {
-		
-		ControleVeiculoVagaCarro obj = service.buscarId(id);
-		return ResponseEntity.ok().body(obj); //ele vai responder de acordo com o obj de resposta entity
-	
-	}
-	*/
-	
+	private ControleVeiculoVagaCarroService service;	
 	
 	@RequestMapping(method=RequestMethod.POST)
 	public ResponseEntity<Void> insert(@Valid @RequestBody ControleVeiculoVagaCarroNewDTO objDTO) {
@@ -52,16 +40,14 @@ public class ControleVeiculoVagaCarroResource {
 				.path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
 	}
-	/*
-	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
-	public ResponseEntity<Void> update(@Valid @RequestBody ControleVeiculoVagaCarroDTO objDTO, @PathVariable Integer id) {
+	
+	@RequestMapping(method=RequestMethod.PUT)
+	public ResponseEntity<Void> update(@Valid @RequestBody ControleVeiculoVagaCarroDTO objDTO) {
 		
-		ControleVeiculoVagaCarro obj = service.fromDTO(objDTO);
-		
-		obj.getVagaCarro().setId(id);
+		ControleVeiculoVagaCarro obj = service.fromDTO(objDTO);	
 		
 		obj = service.update(obj);
 		return ResponseEntity.noContent().build();
 	}
-	*/
+	
 }
