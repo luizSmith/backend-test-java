@@ -62,4 +62,30 @@ public class ControleVeiculoVagaCarroService {
 			
 			return cvc;
 		}
+		/*
+		@Transactional
+		public ControleVeiculoVagaCarro update(ControleVeiculoVagaCarro obj) {
+			ControleVeiculoVagaCarro newObj = buscarId(obj.getId());
+			updateData(newObj, obj);
+			
+			repo.save(newObj);
+			
+			return newObj;
+		}
+		
+		//methodo auxiliar
+		private void updateData(ControleVeiculoVagaCarro newObj, ControleVeiculoVagaCarro obj) {
+			newObj.setSaida(obj.getSaida());
+			newObj.getVagaCarro().setStatusVaga(StatusVaga.DISPONIVEL);	
+		}
+		
+		public ControleVeiculoVagaCarro fromDTO(ControleVeiculoVagaCarroDTO objDTO) {
+			Empresa emp = new Empresa(objDTO.getId(), objDTO.getNome(), null);
+			Endereco end = new Endereco(null, objDTO.getLongradouro(), objDTO.getNumero(), objDTO.getComplemento(), objDTO.getBairro(), objDTO.getCep(), emp);
+			emp.setEndereco(end);
+			
+			return emp;
+		}
+		*/
+		
 }
