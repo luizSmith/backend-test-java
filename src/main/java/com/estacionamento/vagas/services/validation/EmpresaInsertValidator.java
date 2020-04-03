@@ -43,7 +43,7 @@ public class EmpresaInsertValidator implements ConstraintValidator<EmpresaInsert
 		
 		Optional<Empresa> auxId = repo.findById(1);
 		if (auxId.isPresent()) {
-			list.add(new FieldMessage("Empresa", "Só pode haver uma Empresa"));
+			list.add(new FieldMessage("id", "Só pode haver uma Empresa"));
 		}
 
 		for (FieldMessage e : list) { //percorre a lista de erro e adiciona o erro personalizado na lista de erros do framework
