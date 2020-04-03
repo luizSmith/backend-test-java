@@ -18,10 +18,10 @@ public class ControleVeiculoVagaCarro implements Serializable {
 	@JsonIgnore
 	private ControleVeiculoVagaCarroPK id = new ControleVeiculoVagaCarroPK();
 	
-	@JsonFormat(pattern="dd/MM/yyyy HH:mm")
+	@JsonFormat(pattern="dd/MM/yyyy HH:mm", locale = "pt-BR", timezone = "Brazil/East")
 	private Date entrada;
 	
-	@JsonFormat(pattern="dd/MM/yyyy HH:mm")
+	@JsonFormat(pattern="dd/MM/yyyy HH:mm", locale = "pt-BR", timezone = "Brazil/East")
 	private Date saida;
 	
 	public ControleVeiculoVagaCarro(){

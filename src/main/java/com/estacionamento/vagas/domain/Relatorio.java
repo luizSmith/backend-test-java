@@ -21,10 +21,10 @@ public class Relatorio implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	
-	@JsonFormat(pattern="dd/MM/yyyy HH:mm")
+	@JsonFormat(pattern="dd/MM/yyyy HH:mm", locale = "pt-BR", timezone = "Brazil/East")
 	private Date entrada;
 	
-	@JsonFormat(pattern="dd/MM/yyyy HH:mm")
+	@JsonFormat(pattern="dd/MM/yyyy HH:mm", locale = "pt-BR", timezone = "Brazil/East")
 	private Date saida;
 	
 	private Integer numeroVaga;
