@@ -9,9 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.estacionamento.vagas.domain.ControleVeiculoVagaCarro;
+import com.estacionamento.vagas.domain.Relatorio;
 import com.estacionamento.vagas.domain.VagaCarro;
 import com.estacionamento.vagas.domain.Veiculo;
 import com.estacionamento.vagas.domain.enums.StatusVaga;
+import com.estacionamento.vagas.domain.enums.TipoVeiculo;
 import com.estacionamento.vagas.dto.ControleVeiculoVagaCarroDTO;
 import com.estacionamento.vagas.dto.ControleVeiculoVagaCarroNewDTO;
 import com.estacionamento.vagas.repositories.ControleVeiculoVagaCarroRepository;
@@ -33,6 +35,9 @@ public class ControleVeiculoVagaCarroService {
 	
 	@Autowired
 	private VeiculoService veiculoService;
+	
+	@Autowired
+	private RelatorioService relatorioService;
 	
 	public ControleVeiculoVagaCarro buscarId(Integer id) {
 		Optional<ControleVeiculoVagaCarro> obj = repo.findById(id);
@@ -75,8 +80,17 @@ public class ControleVeiculoVagaCarroService {
 			
 			repo.save(newObj);
 			
+			Relatorio rel = new Relatorio(null, newObj.getEntrada(), newObj.getSaida(), newObj.getVagaCarro().getId(), newObj.getVeiculo());
+			
+			rel.setTipoVeiculo(TipoVeiculo.toEnum(newObj.getVeiculo().getTipoVeiculo().getCod()));
+			
+			relatorioService.insert(rel);
+			
 			VagaCarro vagc = newObj.getVagaCarro();
+			
 			vagc.setStatusVaga(StatusVaga.DISPONIVEL);
+			
+			vagc.setControle(null);
 			
 			vagaCarroRepository.save(vagc);
 			

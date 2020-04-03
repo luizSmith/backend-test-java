@@ -9,9 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.estacionamento.vagas.domain.ControleVeiculoVagaMoto;
+import com.estacionamento.vagas.domain.Relatorio;
 import com.estacionamento.vagas.domain.VagaMoto;
 import com.estacionamento.vagas.domain.Veiculo;
 import com.estacionamento.vagas.domain.enums.StatusVaga;
+import com.estacionamento.vagas.domain.enums.TipoVeiculo;
 import com.estacionamento.vagas.dto.ControleVeiculoVagaMotoDTO;
 import com.estacionamento.vagas.dto.ControleVeiculoVagaMotoNewDTO;
 import com.estacionamento.vagas.repositories.ControleVeiculoVagaMotoRepository;
@@ -34,6 +36,9 @@ public class ControleVeiculoVagaMotoService {
 	@Autowired
 	private VeiculoService veiculoService;
 	
+	@Autowired
+	private RelatorioService relatorioService;
+	
 	public ControleVeiculoVagaMoto buscarId(Integer id) {
 		Optional<ControleVeiculoVagaMoto> obj = repo.findById(id);
 		
@@ -48,11 +53,11 @@ public class ControleVeiculoVagaMotoService {
 			
 			repo.save(obj);
 			
-			VagaMoto vagc = vagaMotoService.buscar(obj.getVagaMoto().getId());
+			VagaMoto vagm = vagaMotoService.buscar(obj.getVagaMoto().getId());
 			
-			vagc.setStatusVaga(StatusVaga.toEnum(2));
+			vagm.setStatusVaga(StatusVaga.toEnum(2));
 
-			vagaMotoRepository.save(vagc);
+			vagaMotoRepository.save(vagm);
 			
 			return obj;
 		}
@@ -75,10 +80,18 @@ public class ControleVeiculoVagaMotoService {
 			
 			repo.save(newObj);
 			
-			VagaMoto vagc = newObj.getVagaMoto();
-			vagc.setStatusVaga(StatusVaga.DISPONIVEL);
+			Relatorio rel = new Relatorio(null, newObj.getEntrada(), newObj.getSaida(), newObj.getVagaMoto().getId(), newObj.getVeiculo());
 			
-			vagaMotoRepository.save(vagc);
+			rel.setTipoVeiculo(TipoVeiculo.toEnum(newObj.getVeiculo().getTipoVeiculo().getCod()));
+			
+			relatorioService.insert(rel);
+			
+			VagaMoto vagm = newObj.getVagaMoto();
+			vagm.setStatusVaga(StatusVaga.DISPONIVEL);
+			
+			vagm.setControle(null);
+			
+			vagaMotoRepository.save(vagm);
 			
 			return newObj;
 		}
