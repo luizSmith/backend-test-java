@@ -5,9 +5,9 @@ import java.util.Date;
 
 import javax.validation.constraints.NotNull;
 
-import com.estacionamento.vagas.services.validation.ControleVagaCarroInsert;
+import com.estacionamento.vagas.services.validation.ControleVeiculoVagaCarroInsert;
 
-@ControleVagaCarroInsert
+@ControleVeiculoVagaCarroInsert
 public class ControleVeiculoVagaCarroNewDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	

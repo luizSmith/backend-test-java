@@ -8,10 +8,10 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
-@Constraint(validatedBy = ControleVagaCarroUpdateValidator.class) //nome do Validator
+@Constraint(validatedBy = ControleVeiculoVagaCarroUpdateValidator.class) //nome do Validator
 @Target({ ElementType.TYPE })
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ControleVagaCarroUpdate { //nome anoteção
+public @interface ControleVeiculoVagaCarroUpdate { //nome anoteção
 	String message() default "Erro de validação"; //mensagem padrão
 
 	Class<?>[] groups() default {};

@@ -13,13 +13,13 @@ import com.estacionamento.vagas.dto.ControleVeiculoVagaCarroDTO;
 import com.estacionamento.vagas.repositories.ControleVeiculoVagaCarroRepository;
 import com.estacionamento.vagas.resource.exception.FieldMessage;
 
-public class ControleVagaCarroUpdateValidator implements ConstraintValidator<ControleVagaCarroUpdate, ControleVeiculoVagaCarroDTO> { //Nome Anotação, TipodaClasse
+public class ControleVeiculoVagaCarroUpdateValidator implements ConstraintValidator<ControleVeiculoVagaCarroUpdate, ControleVeiculoVagaCarroDTO> { //Nome Anotação, TipodaClasse
 	
 	@Autowired
 	private ControleVeiculoVagaCarroRepository repo;
 	
 	@Override
-	public void initialize(ControleVagaCarroUpdate ann) { //programação de inicialização caso necessário
+	public void initialize(ControleVeiculoVagaCarroUpdate ann) { //programação de inicialização caso necessário
 	}
 	
 	//isValid faz o retorno dizendo se os dados do objeto estão de acordo com a validação
@@ -34,7 +34,7 @@ public class ControleVagaCarroUpdateValidator implements ConstraintValidator<Con
 		ControleVeiculoVagaCarro auxNome = repo.buscaControleVeiculo(objDTO.getCarroId());
 
 		if (auxNome == null ) {
-			list.add(new FieldMessage("Controle Vaga","Veiculo não entrou no estacionamento"));
+			list.add(new FieldMessage("carroId","Veiculo não entrou no estacionamento"));
 		}		
 
 		for (FieldMessage e : list) { //percorre a lista de erro e adiciona o erro personalizado na lista de erros do framework
