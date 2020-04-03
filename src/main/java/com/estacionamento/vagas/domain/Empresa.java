@@ -44,12 +44,14 @@ public class Empresa implements Serializable {
 	private Endereco endereco;
 	
 	@OneToMany(
-			mappedBy="empresa"
+			mappedBy="empresa",
+			cascade=CascadeType.ALL
 	)	
 	private List<VagaCarro> vagaCarro = new ArrayList<>();
 	
 	@OneToMany(
-			mappedBy="empresa"
+			mappedBy="empresa",
+			cascade=CascadeType.ALL
 	)
 	private List<VagaMoto> vagaMoto = new ArrayList<>();
 	

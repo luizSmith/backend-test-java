@@ -131,7 +131,7 @@ public class EmpresaService {
 		try {
 			repo.deleteById(id);				
 		} catch (DataIntegrityViolationException e) {
-			throw new DataIntegrityException("Não é possivel Excluir uma empresa que possui Vagas");
+			throw new DataIntegrityException("Não é possivel Excluir uma empresa que possui Vagas sendo utilizadas");
 		}
 	}
 	
