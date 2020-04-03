@@ -9,6 +9,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.estacionamento.vagas.domain.ControleVeiculoVagaCarro;
+import com.estacionamento.vagas.domain.ControleVeiculoVagaMoto;
 import com.estacionamento.vagas.domain.Empresa;
 import com.estacionamento.vagas.domain.Endereco;
 import com.estacionamento.vagas.domain.VagaCarro;
@@ -17,6 +18,7 @@ import com.estacionamento.vagas.domain.Veiculo;
 import com.estacionamento.vagas.domain.enums.StatusVaga;
 import com.estacionamento.vagas.domain.enums.TipoVeiculo;
 import com.estacionamento.vagas.repositories.ControleVeiculoVagaCarroRepository;
+import com.estacionamento.vagas.repositories.ControleVeiculoVagaMotoRepository;
 import com.estacionamento.vagas.repositories.EmpresaRepository;
 import com.estacionamento.vagas.repositories.EnderecoRepository;
 import com.estacionamento.vagas.repositories.VagaCarroRepository;
@@ -44,6 +46,9 @@ public class EmpresaEstacionamentoApplication implements CommandLineRunner {
 		
 		@Autowired
 		private ControleVeiculoVagaCarroRepository controleVeiculoVagaCarroRepository;
+		
+		@Autowired
+		private ControleVeiculoVagaMotoRepository controleVeiculoVagaMotoRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(EmpresaEstacionamentoApplication.class, args);
@@ -88,15 +93,21 @@ public class EmpresaEstacionamentoApplication implements CommandLineRunner {
 		
 		ControleVeiculoVagaCarro cvc = new ControleVeiculoVagaCarro(vagc1, v1, sdf.parse("30/09/2019 12:45"));
 		
-	
-		
 		controleVeiculoVagaCarroRepository.save(cvc);
 		
 		vagc1.setStatusVaga(StatusVaga.OCUPADA);
 		
 		vagaCarroRepository.save(vagc1);
-
 		
+		
+		ControleVeiculoVagaMoto cvm = new ControleVeiculoVagaMoto(vagm1, v2, sdf.parse("21/03/2020 12:45"));
+		
+		controleVeiculoVagaMotoRepository.save(cvm);
+		
+		vagc1.setStatusVaga(StatusVaga.OCUPADA);
+		
+		vagaCarroRepository.save(vagc1);
+	
 		
 	}
 
