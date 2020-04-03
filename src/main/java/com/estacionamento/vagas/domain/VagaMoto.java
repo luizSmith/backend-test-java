@@ -1,6 +1,8 @@
 package com.estacionamento.vagas.domain;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import com.estacionamento.vagas.domain.enums.StatusVaga;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -28,6 +31,9 @@ public class VagaMoto implements Serializable {
 			name="empresa_id"
 	)
 	private Empresa empresa;
+	
+	@OneToMany(mappedBy="id.vagaMoto")
+	private Set<ControleVeiculoVagaMoto> controle = new HashSet<>();
 	
 	public VagaMoto() {
 	}
@@ -61,6 +67,14 @@ public class VagaMoto implements Serializable {
 
 	public void setStatusVaga(StatusVaga statusVaga) {
 		this.statusVaga = statusVaga.getCod();
+	}
+
+	public Set<ControleVeiculoVagaMoto> getControle() {
+		return controle;
+	}
+
+	public void setControle(Set<ControleVeiculoVagaMoto> controle) {
+		this.controle = controle;
 	}
 
 	@Override
