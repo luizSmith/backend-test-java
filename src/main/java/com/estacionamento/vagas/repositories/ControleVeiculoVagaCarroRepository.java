@@ -13,4 +13,7 @@ public interface ControleVeiculoVagaCarroRepository extends JpaRepository<Contro
 	 @Query(value = "SELECT * FROM CONTROLE_VEICULO_VAGA_CARRO  controle WHERE controle.VAGA_CARRO_ID = :vagaCarro", nativeQuery = true)
 	 ControleVeiculoVagaCarro buscaControle(@Param("vagaCarro")Integer vagaCarro);
 	 
+	 @Query(value = "SELECT * FROM CONTROLE_VEICULO_VAGA_CARRO  controle WHERE controle.VEICULO_ID = :veiculoId", nativeQuery = true)
+	 ControleVeiculoVagaCarro buscaControleVeiculo(@Param("veiculoId")Integer veiculoId);
+	 
 }

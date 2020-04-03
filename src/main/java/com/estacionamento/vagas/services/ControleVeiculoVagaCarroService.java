@@ -31,6 +31,9 @@ public class ControleVeiculoVagaCarroService {
 	@Autowired
 	private VagaCarroService vagaCarroService;
 	
+	@Autowired
+	private VeiculoService veiculoService;
+	
 	public ControleVeiculoVagaCarro buscarId(Integer id) {
 		Optional<ControleVeiculoVagaCarro> obj = repo.findById(id);
 		
@@ -66,11 +69,11 @@ public class ControleVeiculoVagaCarroService {
 		
 		@Transactional
 		public ControleVeiculoVagaCarro update(ControleVeiculoVagaCarro obj) {
-			ControleVeiculoVagaCarro newObj = repo.buscaControle(obj.getVagaCarro().getId());
+			ControleVeiculoVagaCarro newObj = repo.buscaControleVeiculo(obj.getVeiculo().getId());
 			
 			updateData(newObj, obj);
 			
-			repo.save(newObj);			
+			repo.save(newObj);
 			
 			VagaCarro vagc = newObj.getVagaCarro();
 			vagc.setStatusVaga(StatusVaga.DISPONIVEL);
@@ -86,9 +89,8 @@ public class ControleVeiculoVagaCarroService {
 		}
 		
 		public ControleVeiculoVagaCarro fromDTO(ControleVeiculoVagaCarroDTO objDTO) {
-			VagaCarro vagc = vagaCarroService.buscar(objDTO.getVagaCarroId());
-			
-			return new ControleVeiculoVagaCarro(vagc, null, null);
+			Veiculo v = veiculoService.buscar(objDTO.getCarroId());
+			return new ControleVeiculoVagaCarro(null, v, null);
 		}
 		
 		

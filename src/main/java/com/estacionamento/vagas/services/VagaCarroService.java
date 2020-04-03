@@ -63,7 +63,7 @@ public class VagaCarroService {
 		try {
 			repo.deleteById(id);
 		} catch(DataIntegrityException e) {
-			throw new DataIntegrityException(e.getMessage());
+			throw new DataIntegrityException("Não é possivel Excluir uma vaga com veiculo.");
 		}
 	}
 	

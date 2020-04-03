@@ -9,19 +9,19 @@ public class ControleVeiculoVagaCarroDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@NotNull(message="Preenchimento obrigatorio")
-	private Integer vagaCarroId; 
+	private Integer carroId; 
 
 	private Date saida;
 	
 	public ControleVeiculoVagaCarroDTO () {
 	}
 
-	public Integer getVagaCarroId() {
-		return vagaCarroId;
+	public Integer getCarroId() {
+		return carroId;
 	}
 
-	public void setVagaCarroId(Integer vagaCarroId) {
-		this.vagaCarroId = vagaCarroId;
+	public void setCarroId(Integer carroId) {
+		this.carroId = carroId;
 	}
 
 	public Date getSaida() {
