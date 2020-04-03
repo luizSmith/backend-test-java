@@ -9,20 +9,22 @@ public class ControleVeiculoVagaMotoDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@NotNull(message="Preenchimento obrigatorio")
-	private Integer vagaMotoId; 
+	private Integer motoId; 
 
 	private Date saida;
 	
 	public ControleVeiculoVagaMotoDTO () {
 	}
 
-	public Integer getVagaMotoId() {
-		return vagaMotoId;
+	public Integer getMotoId() {
+		return motoId;
 	}
 
-	public void setVagaMotoId(Integer vagaMotoId) {
-		this.vagaMotoId = vagaMotoId;
+	public void setMotoId(Integer motoId) {
+		this.motoId = motoId;
 	}
+
+
 
 	public Date getSaida() {
 		return saida;
